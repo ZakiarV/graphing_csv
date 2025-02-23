@@ -3,8 +3,8 @@ A simple tool to graph CSV files.
 
 ## Features
 - Graph CSV files (with a header row)
-- Supports multiple columns
-- Supports multiple rows
+- Graph data in physics mode (velocity, acceleration, etc. on the y-axis and time on the x-axis)
+- Graph data rudimentary data analysis (min, max, average, etc.)
 
 ## Usage
 To use the tool:
@@ -23,6 +23,7 @@ The command line arguments currently supported are:
 - `--question`: The question being answered by the graph if applicable (if physics mode is selected required)
 - `--single_plot`: If set, the graph will be plotted on a single plot (optional, default is false)
 - `--output_folder`: The folder to save the graph to (optional, default is the name of the experiment)
+- `--get_data`: If set, the tool will return the data from the CSV file (optional, default is false)
 
 All arguments that are marked as required must be provided for the tool to run. If they are not provided, the tool will raise an error.
 Some arguments are optional and have default values. If they are not provided, the tool will use the default values.

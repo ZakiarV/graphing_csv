@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import os
+from src.get_data.get_data import GetData
 
 
 class Graph:
@@ -54,10 +55,16 @@ class Graph:
             single_plot = self.flags["s"]
         else:
             single_plot = False
-        return experiment, object, question, output_folder, single_plot
+        if "get_data" in self.flags:
+            get_data = self.flags["get_data"]
+        elif "g" in self.flags:
+            get_data = self.flags["g"]
+        else:
+            get_data = False
+        return experiment, object, question, output_folder, single_plot, get_data
 
     def plot_physics(self):
-        experiment, object_, question, output_folder, single_plot = self.get_physics_plot_naming_parameters()
+        experiment, object_, question, output_folder, single_plot, get_data = self.get_physics_plot_naming_parameters()
         folder_name = f"{output_folder}"
         experiment_folder = f"{folder_name}/{experiment}"
         question_folder = f"{experiment_folder}/{question}"
@@ -76,6 +83,9 @@ class Graph:
                     plt.title(f"{question} - {object_}: Position vs Time")
                     plt.savefig(f"{question_folder}/{experiment}_{question}_{object_}_position_vs_time.png")
                 plt.clf()
+            if get_data:
+                data = GetData(self.data["position"], question_folder, f"{experiment}_{question}_position_vs_time", data_type="position")
+                data.write_data()
         if self.data["velocity"] is not None:
             plt.plot(self.data["time"], self.data["velocity"])
             plt.ylabel("Velocity (m/s)")
@@ -88,6 +98,9 @@ class Graph:
                     plt.title(f"{question} - {object_}: Velocity vs Time")
                     plt.savefig(f"{question_folder}/{experiment}_{question}_{object_}_velocity_vs_time.png")
                 plt.clf()
+            if get_data:
+                data = GetData(self.data["velocity"], question_folder, f"{experiment}_{question}_velocity_vs_time", data_type="velocity")
+                data.write_data()
         if self.data["acceleration"] is not None:
             plt.plot(self.data["time"], self.data["acceleration"])
             plt.ylabel("Acceleration (m/s²)")
@@ -100,7 +113,11 @@ class Graph:
                     plt.title(f"{question} - {object_}: Acceleration vs Time")
                     plt.savefig(f"{question_folder}/{experiment}_{question}_{object_}_acceleration_vs_time.png")
                 plt.clf()
+            if get_data:
+                data = GetData(self.data["acceleration"], question_folder, f"{experiment}_{question}_acceleration_vs_time", data_type="acceleration")
+                data.write_data()
         if single_plot:
+            plt.legend(["Position", "Velocity", "Acceleration"])
             if object_ == "none":
                 plt.title(f"{question}: Position, Velocity, and Acceleration vs Time")
                 plt.savefig(f"{question_folder}/{experiment}_{question}_position_velocity_acceleration_vs_time.png")

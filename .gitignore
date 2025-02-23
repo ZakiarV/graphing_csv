@@ -1,5 +1,4 @@
-main.build
-main.dist
-main.onefile-build
+build
 .idea
 .venv
+*.csv

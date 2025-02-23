@@ -14,8 +14,8 @@ To use the tool:
 
 Edit the `run.cmd` file to change the arguments passed to the tool. The arguments are passed to the tool using the `run.cmd` file. The `run.cmd` file is a batch file that runs the tool with the specified arguments.
 The command line arguments currently supported are:
-- `--file` or `-f`: The path to the CSV file to graph (relative or absolute path) (required)
-- `--mode` or `-m`: The mode to use for the graph. Currently supported modes are: (required)
+- `--file`: The path to the CSV file to graph (relative or absolute path) (required)
+- `--mode`: The mode to use for the graph. Currently supported modes are: (required)
   - `physics`: Plots the data formatted as a physics graph (velocity, acceleration, etc. on the y-axis and time on the x-axis)
   - `static`: Plots the data formatted as a static graph (not implemented yet)
 - `--experiment`: The name of the experiment (if physics mode is selected required)
